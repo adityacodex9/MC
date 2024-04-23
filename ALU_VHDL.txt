@@ -1,0 +1,39 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;
+use IEEE.STD_LOGIC_arith.ALL;
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity ALunit is
+    Port ( a : in  STD_LOGIC_VECTOR (3 downto 0);
+           b : in  STD_LOGIC_VECTOR (3 downto 0);
+           sel : in  STD_LOGIC_VECTOR (2 downto 0);
+           op : out  STD_LOGIC_VECTOR (3 downto 0));
+end ALunit;
+
+architecture Behavioral of ALunit is
+
+begin
+ process(a, b, sel)
+  begin
+  case sel is
+  when"000"=>op<= a nand b;
+  when"001"=>op<= a or b;
+  when"010"=>op<= a and b;
+  when"011"=>op<= not a;
+  when"100"=>op<= not b;
+  when"101"=>op<= a + b;
+  when"110"=>op<= a xor b;
+  when"111"=>op<= a * b;
+  when others=> null;
+  end case;
+ end process; 
+end Behavioral;
+
